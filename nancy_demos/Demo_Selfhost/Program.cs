@@ -7,7 +7,7 @@ namespace Demo_Selfhost
     {
         static void Main(string[] args)
         {
-            var host = new NancyHost(new Uri("http://localhost:3000"));
+            var host = new NancyHost(new Uri("http://localhost:4000"));
 
             host.Start();
             Console.WriteLine("Server Iniciado...");

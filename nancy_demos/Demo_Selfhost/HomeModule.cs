@@ -7,7 +7,7 @@ namespace Demo_Selfhost
     {
         public HomeModule()
         {
-            Get["/"] = p => "Olá!!";
+            Get["/"] = p => "Ola!!";
 
             Get["/hi/{name}"] = p => 
             {
