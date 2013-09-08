@@ -1,7 +1,9 @@
 ﻿using System;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Validation;
 using System.Collections.Generic;
+using System.Linq;
 using Demo_Catalogo_app.Models;
 
 namespace Demo_Catalogo_app.Modules
@@ -21,16 +23,37 @@ namespace Demo_Catalogo_app.Modules
 
             Get["/produto/novo"] = _ =>
             {
-                return View["Views/EditProduto", new Produto() { Preco = 1.99m }];
+                return View["Views/EditProduto", new { 
+                    Erros = new string[0],
+                    Produto = new Produto() { Preco = 1.99m } 
+                }];
             };
 
             Post["/produto/novo"] = _ =>
             {
                 Produto produto = this.BindTo(new Produto());
-                _produtos.Add(produto);
 
-                return Response.AsRedirect("/produtos");
+                ModelValidationResult result = this.Validate(produto);
+
+                if (result.IsValid)
+                {
+                    _produtos.Add(produto);
+                    return Response.AsRedirect("/produtos");
+                }
+                else
+                {
+                    return View["Views/EditProduto", new { 
+                            Erros = ObterErros(result), 
+                            Produto = produto 
+                    }];
+                }
             };
+        }
+
+        private IEnumerable<string> ObterErros(ModelValidationResult result)
+        {
+            return from e in result.Errors
+                   select e.GetMessage(e.MemberNames.First());
         }
 
         private void CarregaProdutos()
