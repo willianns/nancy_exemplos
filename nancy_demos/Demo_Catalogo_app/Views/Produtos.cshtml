@@ -1,0 +1,21 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "Layout.cshtml";   
+}
+
+    <h2>Listando produtos</h2>
+
+<table>
+    <tr>
+        <th>Produto</th>
+        <th>Preço</th>
+    </tr>
+    @foreach (var produto in Model)
+    {
+        <tr>
+            <td>@produto.Descricao</td>
+            <td>@Convert.ToDecimal(produto.Preco).ToString("N2")</td>
+        </tr>
+    }
+</table>
