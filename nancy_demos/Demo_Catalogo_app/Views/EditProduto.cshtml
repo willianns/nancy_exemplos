@@ -1,0 +1,19 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "Layout.cshtml";   
+}
+
+    <h2>Formulário de produtos</h2>
+
+    <form action="/produto/novo" method="post">
+        <p>
+            <label>Descrição:</label>
+            <input type="type" name="Descricao" value="@Model.Descricao">
+        </p>
+        <p>
+            <label>Preço unitário:</label>
+            <input type="type" name="Preco" value="@Convert.ToDecimal(Model.Preco).ToString("N2")">
+        </p>
+        <input type="submit" value="Gravar">
+    </form>

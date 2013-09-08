@@ -1,5 +1,6 @@
 ﻿using System;
 using Nancy;
+using Nancy.ModelBinding;
 using System.Collections.Generic;
 using Demo_Catalogo_app.Models;
 
@@ -16,6 +17,19 @@ namespace Demo_Catalogo_app.Modules
             Get["/produtos"] = _ =>
             {
                 return View["Views/Produtos", _produtos];
+            };
+
+            Get["/produto/novo"] = _ =>
+            {
+                return View["Views/EditProduto", new Produto() { Preco = 1.99m }];
+            };
+
+            Post["/produto/novo"] = _ =>
+            {
+                Produto produto = this.BindTo(new Produto());
+                _produtos.Add(produto);
+
+                return Response.AsRedirect("/produtos");
             };
         }
 

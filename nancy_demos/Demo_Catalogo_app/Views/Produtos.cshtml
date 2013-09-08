@@ -5,17 +5,18 @@
 }
 
     <h2>Listando produtos</h2>
+    <a href="/produto/novo">Adicionar produto</a>
 
-<table>
-    <tr>
-        <th>Produto</th>
-        <th>Preço</th>
-    </tr>
-    @foreach (var produto in Model)
-    {
+    <table>
         <tr>
-            <td>@produto.Descricao</td>
-            <td>@Convert.ToDecimal(produto.Preco).ToString("N2")</td>
+            <th>Produto</th>
+            <th>Preço</th>
         </tr>
-    }
-</table>
+        @foreach (var produto in Model)
+        {
+            <tr>
+                <td>@produto.Descricao</td>
+                <td>@Convert.ToDecimal(produto.Preco).ToString("N2")</td>
+            </tr>
+        }
+    </table>
