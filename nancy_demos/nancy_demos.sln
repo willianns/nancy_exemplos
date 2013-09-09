@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Aspnethost", "Demo_Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Catalogo_app", "Demo_Catalogo_app\Demo_Catalogo_app.csproj", "{8A8F79A3-6FD1-4EDD-A1EB-9BAFF2528B97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Catalogo_app.Testes", "Demo_Catalogo_app.Testes\Demo_Catalogo_app.Testes.csproj", "{3CC79C68-2761-41B7-85C3-AEAB581A3B55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{8A8F79A3-6FD1-4EDD-A1EB-9BAFF2528B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8F79A3-6FD1-4EDD-A1EB-9BAFF2528B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A8F79A3-6FD1-4EDD-A1EB-9BAFF2528B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC79C68-2761-41B7-85C3-AEAB581A3B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC79C68-2761-41B7-85C3-AEAB581A3B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC79C68-2761-41B7-85C3-AEAB581A3B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC79C68-2761-41B7-85C3-AEAB581A3B55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
