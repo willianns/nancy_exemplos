@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Nancy;
 using Nancy.ModelBinding;
 using Nancy.Validation;
-using System.Collections.Generic;
-using System.Linq;
+using Nancy.Security;
 using Demo_Catalogo_app.Models;
 
 namespace Demo_Catalogo_app.Modules
@@ -14,6 +15,10 @@ namespace Demo_Catalogo_app.Modules
 
         public ProdutosModule()
         {
+            this.RequiresAuthentication();
+            this.RequiresClaims(new[] { "admin" });
+
+            //produtos fake
             CarregaProdutos();
 
             Get["/produtos"] = _ =>

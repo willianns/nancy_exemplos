@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nancy.Testing;
 using Nancy;
 using Demo_Catalogo_app.Modules;
+using Nancy.Authentication.Forms;
+using Demo_Catalogo_app.Models;
 
 namespace Demo_Catalogo_app.Testes
 {
@@ -11,18 +13,36 @@ namespace Demo_Catalogo_app.Testes
     {
         Browser browser;
         ProdutosModule module;
+        HomeModule homeModule;
 
         [TestInitialize]
-        public void Init()
+        public void Initialize()
         {
-            browser = new Browser(new ConfigurableBootstrapper((cfg) => {
+            var bootstrapper = new ConfigurableBootstrapper((cfg) =>
+            {
+                cfg.Module<HomeModule>();
                 cfg.Module<ProdutosModule>();
-            }));
+                cfg.Dependency<IUserMapper>(new UsuarioMapper());
+                cfg.RequestStartup((container, pipelines, ctx) =>
+                {
+                    var formsConfig = new FormsAuthenticationConfiguration()
+                    {
+                        RedirectUrl = "~/autenticar",
+                        UserMapper = container.Resolve<IUserMapper>()
+                    };
+
+                    FormsAuthentication.Enable(pipelines, formsConfig);
+                });
+            });
+
+            browser = new Browser(bootstrapper);
         }
 
         [TestMethod]
         public void Get_Produtos()
         {
+            RealizarLogin();
+
             var response = browser.Get("/produtos");
 
             response.Body["h3"].ShouldContain("Listando produtos");
@@ -31,6 +51,8 @@ namespace Demo_Catalogo_app.Testes
         [TestMethod]
         public void Post_Produto_Novo_Valido()
         {
+            RealizarLogin();
+
             var response = browser.Post("/produto/novo", (with) =>  {
                 with.FormValue("Descricao", "Novo produto teste");
                 with.FormValue("Preco", "10,00");
@@ -42,13 +64,22 @@ namespace Demo_Catalogo_app.Testes
         [TestMethod]
         public void Post_Produto_Novo_Invalido()
         {
-            var response = browser.Post("/produto/novo", (with) =>
-            {
+            RealizarLogin();
+
+            var response = browser.Post("/produto/novo", (with) => {
                 with.FormValue("Descricao", "");
                 with.FormValue("Preco", "");
             });
 
             response.Body["ul li.erro"].ShouldExist();
+        }
+
+        private void RealizarLogin()
+        {
+            browser.Post("/autenticar", (with) => {
+                with.FormValue("Usuario", "jose");
+                with.FormValue("Senha", "123");
+            });
         }
     }
 }

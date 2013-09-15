@@ -16,11 +16,11 @@
     <form action="/produto/novo" method="post">
         <p>
             <label>Descrição:</label>
-            <input type="type" name="Descricao" value="@Model.Produto.Descricao">
+            <input type="text" name="Descricao" value="@Model.Produto.Descricao">
         </p>
         <p>
             <label>Preço unitário:</label>
-            <input type="type" name="Preco" value="@Convert.ToDecimal(Model.Produto.Preco).ToString("N2")">
+            <input type="text" name="Preco" value="@Convert.ToDecimal(Model.Produto.Preco).ToString("N2")">
         </p>
         <input type="submit" value="Gravar">
     </form>
