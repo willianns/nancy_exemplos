@@ -19,7 +19,7 @@ namespace Demo_Catalogo_app.Modules
             Post["/autenticar"] = _ =>
             {
                 var login = this.BindTo(new LoginForm());
-                //Simples demonstração
+                //Simples demonstração com valores fixos
                 if (login.Usuario != "jose" || login.Senha != "123")
                 {
                     return View["Views/Autenticar", "Credênciais inválidas"];
@@ -27,6 +27,8 @@ namespace Demo_Catalogo_app.Modules
 
                 return this.LoginAndRedirect(Guid.Parse("4AAF4DCC-65C6-4CAD-9545-3AD33E8C7289"), fallbackRedirectUrl: "/");
             };
+
+            Get["/sair"] = _ => this.LogoutAndRedirect("/");
         }
 
         public class LoginForm

@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="/assets/estilo.css">
 </head>
 <body>
+    @if (Url.RenderContext.Context.CurrentUser != null)
+    {
+        @Url.RenderContext.Context.CurrentUser.UserName 
+        @<a href="/sair">sair</a>
+    }
+
     @RenderBody()
 </body>
 </html>
