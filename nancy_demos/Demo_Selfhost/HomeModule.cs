@@ -32,6 +32,8 @@ namespace Demo_Selfhost
             {
                 return String.Format("Pagina acessada via POST, nome postado {0}", Request.Form["nome"]);
             };
+
+            Get["/negotiation"] = _ => Negotiate.WithModel(new { Mensagem = "Hello" }).WithView("Msg");
         }
     }
 }
