@@ -14,6 +14,7 @@
         </ul>
 
     <form action="/produto/novo" method="post">
+        @Html.AntiForgeryToken()
         <p>
             <label>Descrição:</label>
             <input type="text" name="Descricao" value="@Model.Produto.Descricao">

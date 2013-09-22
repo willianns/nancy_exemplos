@@ -36,6 +36,8 @@ namespace Demo_Catalogo_app.Modules
 
             Post["/produto/novo"] = _ =>
             {
+                this.ValidateCsrfToken(TimeSpan.FromSeconds(60));
+
                 Produto produto = this.BindTo(new Produto());
 
                 ModelValidationResult result = this.Validate(produto);

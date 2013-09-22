@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Conventions;
+using Nancy.Security;
 using System;
 
 namespace Demo_Catalogo_app
@@ -18,6 +19,8 @@ namespace Demo_Catalogo_app
         protected override void RequestStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines, NancyContext context)
         {
             base.RequestStartup(container, pipelines, context);
+
+            Csrf.Enable(pipelines);
 
             var formsConfig = new FormsAuthenticationConfiguration() 
             {
