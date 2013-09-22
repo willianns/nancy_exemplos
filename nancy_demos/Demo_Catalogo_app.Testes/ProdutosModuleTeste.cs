@@ -5,6 +5,7 @@ using Nancy;
 using Demo_Catalogo_app.Modules;
 using Nancy.Authentication.Forms;
 using Demo_Catalogo_app.Models;
+using Nancy.Security;
 
 namespace Demo_Catalogo_app.Testes
 {
@@ -20,11 +21,13 @@ namespace Demo_Catalogo_app.Testes
         {
             var bootstrapper = new ConfigurableBootstrapper((cfg) =>
             {
-                cfg.Module<HomeModule>();
-                cfg.Module<ProdutosModule>();
-                cfg.Dependency<IUserMapper>(new UsuarioMapper());
-                cfg.RequestStartup((container, pipelines, ctx) =>
+                cfg.Module<HomeModule>()
+                .Module<ProdutosModule>()
+                .Dependency<IUserMapper>(new UsuarioMapper())
+                .CsrfTokenValidator(new FakeCsrfTokenValidator())
+                .ApplicationStartup((container, pipelines) =>
                 {
+                    Csrf.Enable(pipelines);
                     var formsConfig = new FormsAuthenticationConfiguration()
                     {
                         RedirectUrl = "~/autenticar",
@@ -65,7 +68,7 @@ namespace Demo_Catalogo_app.Testes
         public void Post_Produto_Novo_Invalido()
         {
             RealizarLogin();
-
+            
             var response = browser.Post("/produto/novo", (with) => {
                 with.FormValue("Descricao", "");
                 with.FormValue("Preco", "");
@@ -80,6 +83,20 @@ namespace Demo_Catalogo_app.Testes
                 with.FormValue("Usuario", "jose");
                 with.FormValue("Senha", "123");
             });
+        }
+    }
+
+    public class FakeCsrfTokenValidator : ICsrfTokenValidator
+    {
+
+        public bool CookieTokenStillValid(CsrfToken cookieToken)
+        {
+            return true;
+        }
+
+        public CsrfTokenValidationResult Validate(CsrfToken tokenOne, CsrfToken tokenTwo, TimeSpan? validityPeriod = null)
+        {
+            return CsrfTokenValidationResult.Ok;
         }
     }
 }

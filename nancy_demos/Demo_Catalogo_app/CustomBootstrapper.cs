@@ -16,9 +16,9 @@ namespace Demo_Catalogo_app
             container.Register<IUserMapper, UsuarioMapper>();
         }
 
-        protected override void RequestStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines, NancyContext context)
+        protected override void ApplicationStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
         {
-            base.RequestStartup(container, pipelines, context);
+            base.ApplicationStartup(container, pipelines);
 
             Csrf.Enable(pipelines);
 
