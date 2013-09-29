@@ -1,5 +1,6 @@
 ﻿using Nancy;
 using System;
+using System.Diagnostics;
 
 namespace Demo_Selfhost
 {
@@ -7,7 +8,18 @@ namespace Demo_Selfhost
     {
         public HomeModule()
         {
-            Get["/"] = p => "Ola!!";
+            Before += ctx =>
+            {
+                Trace.WriteLine(String.Format("Url requisitada = {0}", ctx.Request.Url));
+                return null;
+            };
+
+            After += ctx =>
+            {
+                Trace.WriteLine("Após processamento");
+            };
+
+            Get["/"] = p => "Nancy up and running!";
 
             Get["/hi/{name}"] = p => 
             {
@@ -30,7 +42,7 @@ namespace Demo_Selfhost
 
             Post["/form"] = p =>
             {
-                return String.Format("Pagina acessada via POST, nome postado {0}", Request.Form["nome"]);
+                return String.Format("Pagina acessada via POST, valor postado {0}", Request.Form["nome"]);
             };
 
             Get["/negotiation"] = _ => Negotiate.WithModel(new { Mensagem = "Hello" }).WithView("Msg");
