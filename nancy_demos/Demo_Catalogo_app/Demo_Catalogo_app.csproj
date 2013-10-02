@@ -80,6 +80,8 @@
     <None Include="Views\EditProduto.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="public\bootstrap-responsive.min.css" />
+    <Content Include="public\bootstrap.min.css" />
     <Content Include="public\estilo.css" />
     <None Include="Views\Autenticar.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

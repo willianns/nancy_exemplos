@@ -4,7 +4,7 @@
     Layout = "Layout.cshtml";   
 }
 
-    <h2>Formulário de produtos</h2>
+    <h4>Formulário de produtos</h4>
 
         <ul>
         @foreach (var erro in Model.Erros)
@@ -14,14 +14,16 @@
         </ul>
 
     <form action="/produto/novo" method="post">
-        @Html.AntiForgeryToken()
-        <p>
-            <label>Descrição:</label>
-            <input type="text" name="Descricao" value="@Model.Produto.Descricao">
-        </p>
-        <p>
-            <label>Preço unitário:</label>
-            <input type="text" name="Preco" value="@Convert.ToDecimal(Model.Produto.Preco).ToString("N2")">
-        </p>
-        <input type="submit" value="Gravar">
+        <fieldset>
+            @Html.AntiForgeryToken()
+            <p>
+                <label>Descrição:</label>
+                <input type="text" name="Descricao" value="@Model.Produto.Descricao">
+            </p>
+            <p>
+                <label>Preço unitário:</label>
+                <input type="text" name="Preco" value="@Convert.ToDecimal(Model.Produto.Preco).ToString("N2")">
+            </p>
+            <input type="submit" class="btn btn-inverse" value="Gravar">
+        </fieldset>
     </form>

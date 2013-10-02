@@ -4,15 +4,24 @@
 <head>
     <meta charset="utf-8" />
     <title>Catalogo</title>
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/estilo.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Catalogo de produtos</h1>
+
+        
     @if (Url.RenderContext.Context.CurrentUser != null)
     {
-        @Url.RenderContext.Context.CurrentUser.UserName 
-        @<a href="/sair">sair</a>
+        <p>
+            <a href="/sair">sair</a>
+        </p>
     }
+        
 
     @RenderBody()
+    </div>
 </body>
 </html>
