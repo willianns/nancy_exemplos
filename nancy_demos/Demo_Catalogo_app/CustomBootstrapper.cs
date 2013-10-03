@@ -20,7 +20,7 @@ namespace Demo_Catalogo_app
         {
             base.RequestStartup(container, pipelines, context);
 
-            context.Response.Headers.Add("X-FRAME-OPTIONS", "DENY");
+            pipelines.AfterRequest.AddItemToEndOfPipeline(ctx => ctx.Response.Headers.Add("X-FRAME-OPTIONS", "DENY"));
 
             Csrf.Enable(pipelines);
 
