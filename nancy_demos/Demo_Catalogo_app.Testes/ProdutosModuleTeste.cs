@@ -13,8 +13,6 @@ namespace Demo_Catalogo_app.Testes
     public class ProdutosModuleTeste
     {
         Browser browser;
-        ProdutosModule module;
-        HomeModule homeModule;
 
         [TestInitialize]
         public void Initialize()
@@ -39,6 +37,14 @@ namespace Demo_Catalogo_app.Testes
             });
 
             browser = new Browser(bootstrapper);
+        }
+
+        [TestMethod]
+        public void Get_Produtos_Nao_Autenticado_Deve_Ser_Redirecionado_Ao_Login()
+        {
+            var response = browser.Get("/produtos");
+
+            response.ShouldHaveRedirectedTo("/autenticar?returnUrl=/produtos");
         }
 
         [TestMethod]

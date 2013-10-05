@@ -68,8 +68,8 @@ namespace Demo_Catalogo_app.Modules
             if (_produtos == null)
             {
                 _produtos = new List<Produto>();
-                _produtos.Add(new Produto { Descricao = "Boné Trucker", Preco = 120.00m });
-                _produtos.Add(new Produto { Descricao = "Tênis p/ Skate", Preco = 349.99m });
+                _produtos.Add(new Produto { Descricao = "Boné", Preco = 120.00m });
+                _produtos.Add(new Produto { Descricao = "Tênis", Preco = 349.99m });
             }
         }
     }
